@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Cronograma - Download Oficial</title>
+    <title>Calculadora de Cronograma - LisanVaught Software</title>
     <!-- Configura o ícone na aba do navegador -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect x='10' y='15' width='80' height='80' rx='15' fill='%23632c94'/><rect x='20' y='35' width='60' height='50' rx='8' fill='white'/><path d='M32 10v12M68 10v12' stroke='white' stroke-width='6' stroke-linecap='round'/></svg>">
     <style>
@@ -62,6 +62,7 @@
             border-radius: 8px;
             transition: background 0.3s, transform 0.2s;
             box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+            cursor: pointer;
         }
         .btn-download:hover {
             background-color: #27ae60;
@@ -76,12 +77,21 @@
             letter-spacing: 0.5px;
             line-height: 1.6;
         }
+        /* Classe oculta para a mensagem de obrigado */
+        .oculto {
+            display: none;
+        }
+        .sucesso-titulo {
+            color: #2ecc71;
+            font-size: 28px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Ícone do app corrigido e centralizado -->
+        <!-- Ícone do app centralizado -->
         <div class="icon">
             <svg viewBox="0 0 100 100" xmlns="http://w3.org">
                 <defs>
@@ -98,20 +108,39 @@
             </svg>
         </div>
         
-        <h1>Calculadora de Cronograma Profissional</h1>
-        <p>Baixe agora a versão oficial para Windows. Saiba de uma forma simples e intuitiva o andamento dos alunos em seu curso. Otimize seu tempo com extrema facilidade e praticidade para saber se o aluno está adiantado, atrasado ou em dia.</p>
-        
-        <!-- Link de download direto conectado ao Google Drive -->
-        <a href="https://www.dropbox.com/scl/fi/qdwj6k8nmsqubjwdly9ec/Calculadora_setup.zip?rlkey=tpdklgcalbui3ikbyom0zcn90&st=s9pmfcu2&dl=1" class="btn-download">
-            💾 Baixar Instalador para Windows (.exe)
-        </a>
+        <!-- Bloco Principal (Texto + Botão) que vai sumir após o clique -->
+        <div id="conteudo-principal">
+            <h1>Calculadora de Cronograma Profissional</h1>
+            <p>Baixe agora a versão oficial para Windows. Saiba de uma forma simples e intuitiva o andamento dos alunos em seu curso, otimize seu tempo com extrema facilidade e praticidade para saber se o aluno está adiantado, atrasado ou em dia.</p>
+            
+            <!-- Botão com gatilho JavaScript para iniciar o download e trocar de tela -->
+            <a href="https://www.dropbox.com/scl/fi/qdwj6k8nmsqubjwdly9ec/Calculadora_setup.zip?rlkey=tpdklgcalbui3ikbyom0zcn90&st=s9pmfcu2&dl=1" id="btnBaixar" class="btn-download">
+                💾 Baixar Instalador para Windows (.exe)
+            </a>
+        </div>
+
+        <!-- Bloco Oculto da Mensagem de Obrigado (Só aparece após o clique) -->
+        <div id="conteudo-obrigado" class="oculto">
+            <h1 class="sucesso-titulo">🎉 Obrigado por Baixar!</h1>
+            <p>O download do seu instalador já começou automaticamente. Se o download não iniciar em alguns segundos, por favor atualize a página e tente novamente.</p>
+        </div>
         
         <!-- Rodapé com Versão e Direitos Autorais -->
         <div class="footer">
-            Versão 1.0.2 | Seguro e Verificado de vírus.<br>
-            &copy; 2026 Lucas Vicente - Lisan Vaught Software - LVS. Todos os direitos reservados.
+            Versão 1.0.5 | Seguro e Verificado de vírus.<br>
+            &copy; 2026 LisanVaught Software - LVS. Todos os direitos reservados.
         </div>
     </div>
+
+    <!-- Script JavaScript que controla a mudança de layout -->
+    <script>
+        document.getElementById('btnBaixar').addEventListener('click', function() {
+            // Esconde o título, texto e botão antigos
+            document.getElementById('conteudo-principal').style.display = 'none';
+            // Exibe a mensagem de sucesso com "Obrigado por Baixar!"
+            document.getElementById('conteudo-obrigado').style.display = 'block';
+        });
+    </script>
 
 </body>
 </html>
