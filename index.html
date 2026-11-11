@@ -3,144 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Cronograma - LisanVaught Software</title>
-    <!-- Configura o ícone na aba do navegador -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect x='10' y='15' width='80' height='80' rx='15' fill='%23632c94'/><rect x='20' y='35' width='60' height='50' rx='8' fill='white'/><path d='M32 10v12M68 10v12' stroke='white' stroke-width='6' stroke-linecap='round'/></svg>">
+    <title>Calculadora de Cronograma Profissional - LisanVaught Software</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #0078d4;
+            --primary-hover: #005a9e;
+            --success: #28a745;
+            --success-hover: #218838;
+            --dark: #201f1e;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Degradê moderno combinando com a logo */
-            background-image: linear-gradient(135deg, #1e3c72 0%, #2a5298 30%, #632c94 100%);
+            background: linear-gradient(135deg, #0078d4 30%, #7b2cbf 100%);
             background-attachment: fixed;
-            color: #333;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            max-width: 450px;
-            width: 90%;
-            display: block; /* Garante que os elementos fiquem um abaixo do outro */
-        }
-        .icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .icon svg {
-            width: 100px;
-            height: 100px;
-            margin-top: 10px;
-        }
-        h1 {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
-            font-size: 24px;
-        }
-        p {
-            color: #7f8c8d;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 30px;
-        }
-        .btn-download {
-            display: inline-block;
-            background-color: #2ecc71;
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
-            cursor: pointer;
-        }
-        .btn-download:hover {
-            background-color: #27ae60;
-            transform: scale(1.02); /* Leve efeito de zoom ao passar o mouse */
-        }
-        .footer {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #bdc3c7;
-            /* Fonte Robótica/Tecnológica para o Copyright e Versão */
-            font-family: 'Roboto', 'Courier New', Courier, monospace;
-            letter-spacing: 0.5px;
+            color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        /* Classe oculta para a mensagem de obrigado */
-        .oculto {
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-trial {
+            background-color: #ffffff;
+            color: var(--primary);
+            margin-bottom: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-trial:hover {
+            background-color: #b3e5fc;
+            color: #004b87;
+            transform: translateY(-2px);
+        }
+
+        .checkout-section {
+            background: #ffffff;
+            padding: 50px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .checkout-section h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .checkout-section .subtitle {
+            color: #666666;
+            margin-bottom: 40px;
+        }
+
+        .cards-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #faf9f8;
+            border: 2px solid #edebe9;
+            border-radius: 12px;
+            padding: 35px 25px;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: #555555;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .btn-buy {
+            background-color: var(--success);
+            color: #ffffff;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+        }
+
+        .btn-buy:hover {
+            background-color: var(--success-hover);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-overlay {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .sucesso-titulo {
-            color: #2ecc71;
-            font-size: 28px;
-            margin-top: 15px;
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #edebe9;
+            color: var(--primary);
+            font-size: 1.35rem;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            color: #333333;
+            background-color: #faf9f8;
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+        }
+
+        .modal-body h4 {
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--dark);
+            border-bottom: 1px solid #edebe9;
+            padding-bottom: 4px;
+        }
+
+        .modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #edebe9;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            background-color: #ffffff;
+        }
+
+        .btn-modal {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .btn-cancel {
+            background-color: #edebe9;
+            color: #333333;
+        }
+
+        .btn-cancel:hover {
+            background-color: #e1dfdd;
+        }
+
+        .btn-accept {
+            background-color: var(--success);
+            color: #ffffff;
+        }
+
+        .btn-accept:hover {
+            background-color: var(--success-hover);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Ícone do app centralizado -->
-        <div class="icon">
-            <svg viewBox="0 0 100 100" xmlns="http://w3.org">
-                <defs>
-                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#2a5298" />
-                        <stop offset="100%" stop-color="#632c94" />
-                    </linearGradient>
-                </defs>
-                <rect x="10" y="15" width="80" height="80" rx="16" fill="url(#logoGrad)"/>
-                <path d="M32 8V20M68 8V20" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
-                <rect x="20" y="35" width="60" height="48" rx="8" fill="#ffffff"/>
-                <path d="M32 48H44M32 58H52M32 68H62" stroke="url(#logoGrad)" stroke-width="5" stroke-linecap="round"/>
-                <path d="M58 48L64 54L74 44" stroke="#2ecc71" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </svg>
-        </div>
-        
-        <!-- Bloco Principal (Texto + Botão) que vai sumir após o clique -->
-        <div id="conteudo-principal">
+        <header>
             <h1>Calculadora de Cronograma Profissional</h1>
-            <p>Baixe agora a versão oficial para Windows. Saiba de uma forma simples e intuitiva o andamento dos alunos em seu curso, otimize seu tempo com extrema facilidade e praticidade para saber se o aluno está adiantado, atrasado ou em dia.</p>
+            <p>Saiba de uma forma simples e intuitiva o andamento dos alunos em seu curso. Otimize seu tempo com extrema facilidade e praticidade para saber se o aluno está adiantado, atrasado ou em dia.</p>
             
-            <!-- Botão com gatilho JavaScript para iniciar o download e trocar de tela -->
-            <a href="https://www.dropbox.com/scl/fi/qdwj6k8nmsqubjwdly9ec/Calculadora_setup.zip?rlkey=tpdklgcalbui3ikbyom0zcn90&st=jcronr13&dl=1" id="btnBaixar" class="btn-download">
-                💾 Baixar Instalador para Windows (.exe)
-            </a>
-        </div>
+            <button type="button" id="btn-abrir-eula" class="btn btn-trial">
+                💾 Baixar Versão de Avaliação Grátis (30 Dias)
+            </button>
+        </header>
 
-        <!-- Bloco Oculto da Mensagem de Obrigado (Só aparece após o clique) -->
-        <div id="conteudo-obrigado" class="oculto">
-            <h1 class="sucesso-titulo">🎉 Obrigado por Baixar!</h1>
-            <p>O download do seu instalador já começou automaticamente. Se o download não iniciar em alguns segundos, por favor atualize a página e tente novamente.</p>
-        </div>
-        
-        <!-- Rodapé com Versão e Direitos Autorais -->
-        <div class="footer">
-            Versão 1.0.5 | Seguro e Verificado de vírus.<br>
-            &copy; 2026 LisanVaught Software - LVS. Todos os direitos reservados.
+        <section class="checkout-section">
+            <h2>Adquira a Licença Vitalícia via PIX</h2>
+            <p class="subtitle">Libere o acesso permanente ao sistema agora mesmo.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div>
+                        <h3>📦 Adquirir Licença</h3>
+                        <div class="price">R$ 400,00</div>
+                        <p>Você recebe o instalador vitalício sem travas e a chave de ativação direto no seu e-mail. Ideal para novas instalações ou para desbloquear sua versão Trial.</p>
+                    </div>
+                    <a href="https://pay.kiwify.com.br/HG5d61B" class="btn btn-buy">
+                        Comprar Programa Completo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Versão 1.0.5 | Seguro e Verificado contra vírus.</p>
+            <p>&copy; 2026 Lucas Vicente - LisanVaught Software - LVS. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <div id="modal-eula" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                Contrato de Licença de Usuário Final (EULA)
+            </div>
+            <div class="modal-body">
+                <p><strong>SOFTWARE:</strong> Calculadora de Cronograma Escolar Profissional<br>
+                <strong>LICENCIANTE:</strong> Lucas Vicente (LisanVaught Software)</p>
+                <p>Este é um contrato legal entre você (Pessoa Física ou Jurídica) e o Licenciante para o uso do programa de computador acima identificado. Ao instalar, copiar ou utilizar o software, você concorda com todos os termos deste contrato.</p>
+                
+                <h4>1. Concessão da Licença</h4>
+                <p>• <strong>Versão de Avaliação (Trial):</strong> O Licenciante concede uma licença limitada, não exclusiva e intransferível para testar o software de forma gratuita pelo prazo improrrogável de 30 (trinta) dias a partir da primeira instalação.</p>
+                <p>• <strong>Versão Completa (Vitalícia):</strong> Após a aquisição da chave de ativação por meio dos canais oficiais (Kiwify), o usuário obtém o direito de uso permanente e vitalício do software, vinculado aos termos deste instrumento.</p>
+                
+                <h4>2. Restrições de Uso (Proibição de Engenharia Reversa)</h4>
+                <p>• <strong>Engenharia Reversa:</strong> É expressamente proibido contornar as travas de segurança por tempo, descompilar, desmontar, realizar engenharia reversa, modificar, traduzir ou tentar descobrir o código-fonte do software, sob qualquer pretexto.</p>
+                <p>• <strong>Pirataria e Distribuição:</strong> É proibido sublicenciar, alugar, arrendar, vender ou distribuir cópias da versão vitalícia do software sem a autorização prévia por escrito do Licenciante.</p>
+                
+                <h4>3. Propriedade Intelectual</h4>
+                <p>O software é protegido pelas leis de direitos autorais e tratados internacionais, incluindo a Lei Federal nº 9.609/1998 (Lei do Software) e a Lei Federal nº 9.610/1998. A estrutura, organização, código-fonte e algoritmos são segredos comerciais e propriedade exclusiva do criador Lucas Vicente.</p>
+                
+                <h4>4. Penalidades</h4>
+                <p>A violação de qualquer das obrigações dispostas neste contrato configurará crime de violação de direito autoral de programa de computador, sujeitando o infrator às penalidades civis (indenização por perdas e danos e lucros cessantes) e criminais previstas no Art. 12 da Lei nº 9.609/1998.</p>
+                
+                <h4>5. Foro</h4>
+                <p>Para dirimir quaisquer dúvidas ou litígios decorrentes deste contrato, fica eleito o Foro da Comarca de Penha, Estado de Santa Catarina, com renúncia expressa a qualquer outro.</p>
+                <br>
+                <p style="text-align: center; color: #666; font-size: 0.85rem;">LisanVaught Software<br>Lucas Vicente — Desenvolvedor.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-cancelar-eula" class="btn btn-modal btn-cancel">Cancelar</button>
+                <a href="https://www.dropbox.com/scl/fi/u6xamaxtyy51xcrd2jb1s/CalculadoraC_Trial_Setup.zip?rlkey=lwkzwatbhls6j7jybeajs2qsf&st=uxc6ag1t&dl=1" id="btn-aceitar-eula" class="btn btn-modal btn-accept" target="_blank" rel="noopener noreferrer">
+                    Li e Aceito os Termos
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Script JavaScript que controla a mudança de layout -->
     <script>
-        document.getElementById('btnBaixar').addEventListener('click', function() {
-            // Esconde o título, texto e botão antigos
-            document.getElementById('conteudo-principal').style.display = 'none';
-            // Exibe a mensagem de sucesso com "Obrigado por Baixar!"
-            document.getElementById('conteudo-obrigado').style.display = 'block';
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalEula = document.getElementById('modal-eula');
+            const btnAbrir = document.getElementById('btn-abrir-eula');
+            const btnCancelar = document.getElementById('btn-cancelar-eula');
+            const btnAceitar = document.getElementById('btn-aceitar-eula');
+
+            btnAbrir.addEventListener('click', () => {
+                modalEula.classList.add('show');
+            });
+
+            btnCancelar.addEventListener('click', () => {
+                modalEula.classList.remove('show');
+            });
+
+            modalEula.addEventListener('click', (event) => {
+                if (event.target === modalEula) {
+                    modalEula.classList.remove('show');
+                }
+            });
+
+            btnAceitar.addEventListener('click', () => {
+                modalEula.classList.remove('show');
+            });
         });
     </script>
-
 </body>
 </html>
