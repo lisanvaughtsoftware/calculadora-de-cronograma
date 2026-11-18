@@ -298,18 +298,21 @@
                             }
 
                             .btn-buy, #btn-aceitar-eula {
-                            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 55%, #c41e8a 100%) !important;
+                            background: linear-gradient(135deg, #2575fc 0%, #6a11cb 22%, #c026d3 42%, #7c3aed 70%, #2575fc 100%);
+                            background-size: 250% auto;
                             color: #ffffff !important;
                             border: none !important;
                             box-shadow: 0 4px 15px rgba(106, 17, 203, 0.35);
-                            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+                            transition: transform 0.2s ease, box-shadow 0.3s ease, background-position 0.5s ease;
                             }
 
-                           .btn-buy:hover, #btn-aceitar-eula:hover {
-                           transform: translateY(-2px);
-                           box-shadow: 0 6px 20px rgba(106, 17, 203, 0.5);
-                           filter: brightness(1.08);
-                           }
+                            .btn-buy:hover, #btn-aceitar-eula:hover {
+                            background-position: right center;
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.55);
+                            filter: brightness(1.08);
+                            }
+
                             
                            #btn-abrir-eula, .btn-ms {
                            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 35%, #3b389c 65%, #6d28d9 100%);
