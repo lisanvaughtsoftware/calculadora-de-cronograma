@@ -284,18 +284,43 @@
                              .card:hover {
                              border-color: #7E22CE !important;
                              }
+                                /* Faz a transição da borda do FAQ ficar suave */
+                                /* Permite animar a altura automática do <details> nos navegadores modernos */
+                                :root {
+                                    interpolate-size: allow-keywords;
+                                }
+                                
+                                /* Faz a transição da borda e fundo do FAQ ficar suave */
+                                .faq-section details {
+                                    transition: border-color 0.25s ease, background-color 0.25s ease;
+                                    overflow: hidden;
+                                }
+                                
+                                /* Acende a borda em lilás claro ao passar o mouse, tocar ou abrir a pergunta */
+                                .faq-section details:hover,
+                                .faq-section details[open] {
+                                    border-color: #D8B4FE !important;
+                                    background-color: rgba(15, 23, 42, 0.55) !important;
+                                }
+                                
+                                /* Animação suave de abertura e fechamento do conteúdo */
+                                .faq-section details::details-content {
+                                    display: block;
+                                    block-size: 0;
+                                    opacity: 0;
+                                    overflow: hidden;
+                                    transition: 
+                                        block-size 0.35s ease, 
+                                        opacity 0.3s ease, 
+                                        content-visibility 0.35s allow-discrete;
+                                }
+                                
+                                /* Estado aberto */
+                                .faq-section details[open]::details-content {
+                                    block-size: auto;
+                                    opacity: 1;
+                                }
 
-                             /* Faz a transição da borda do FAQ ficar suave */
-                            .faq-section details {
-                             transition: border-color 0.2s ease, background-color 0.2s ease;
-                             }
-
-                          /* Acende a borda em lilás claro ao passar o mouse, tocar ou abrir a pergunta */
-                            .faq-section details:hover,
-                            .faq-section details[open] {
-                            border-color: #D8B4FE !important;
-                            background-color: rgba(15, 23, 42, 0.55) !important;
-                            }
 
                             .btn-buy, #btn-aceitar-eula {
                             background: linear-gradient(135deg, #2575fc 0%, #6a11cb 22%, #c026d3 42%, #7c3aed 70%, #2575fc 100%);
