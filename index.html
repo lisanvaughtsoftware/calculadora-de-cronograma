@@ -315,20 +315,32 @@
 
                             
                            #btn-abrir-eula, .btn-ms {
-                           background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 35%, #3b389c 65%, #6d28d9 100%);
-                           background-size: 250% auto;
-                           color: #ffffff !important;
-                           border: none !important;
-                           box-shadow: 0 4px 15px rgba(37, 117, 252, 0.35);
-                           transition: transform 0.2s ease, box-shadow 0.3s ease, background-position 0.4s ease;
-                           }
+                                /* Mantém o azul na esquerda (0% a 40%) e cria um degradê rico de roxo até o rosa na direita (55% a 100%) */
+                                background: linear-gradient(
+                                    135deg, 
+                                    #1e3a8a 0%,     /* Azul escuro (estado normal) */
+                                    #2563eb 35%,    /* Azul vibrante (estado normal) */
+                                    #5b21b6 55%,    /* Roxo profundo */
+                                    #7c3aed 70%,    /* Roxo vivo */
+                                    #c026d3 85%,    /* Fúcsia / Roxo-rosado */
+                                    #ec4899 100%    /* Rosa intenso na ponta direita */
+                                );
+                                background-size: 250% auto;
+                                background-position: left center; /* Garante que comece sempre no azul */
+                                color: #ffffff !important;
+                                border: none !important;
+                                box-shadow: 0 4px 15px rgba(37, 117, 252, 0.35);
+                                transition: transform 0.2s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+                            }
+                            
+                            #btn-abrir-eula:hover, .btn-ms:hover {
+                                background-position: right center;
+                                transform: translateY(-2px);
+                                /* Sombra atualizada para refletir o brilho roxo-rosado */
+                                box-shadow: 0 6px 22px rgba(219, 39, 119, 0.45);
+                                filter: brightness(1.06);
+                            }
 
-                           #btn-abrir-eula:hover, .btn-ms:hover {
-                           background-position: right center;
-                           transform: translateY(-2px);
-                           box-shadow: 0 6px 20px rgba(109, 40, 217, 0.5);
-                           filter: brightness(1.08);
-                           }
 
 
                            #btn-abrir-eula svg, .btn-ms svg {
